@@ -43,5 +43,5 @@ resource "aws_instance" "veilid-node" {
 
 resource "aws_key_pair" "node-access" {
   key_name   = "veilid-key"
-  public_key = file("./veilid-key.pub")
+  public_key = file("FILEPATH_TO_YOUR_PUBLIC_SSH_KEY")
 }
