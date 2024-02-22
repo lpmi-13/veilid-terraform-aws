@@ -11,5 +11,5 @@ terraform {
 
 provider "aws" {
   # change this to whatever region you want to run nodes in
-  region = "us-east-1"
+  region = "us-west-2"
 }
