@@ -10,7 +10,7 @@ Even though AWS doesn't have a "forever" free tier like Azure/GCP/Oracle, you mi
 
 You'll need terraform to run this, and you can get the installation instructions [here](https://developer.hashicorp.com/terraform/install).
 
-If you don't have an Account on AWS yet, go head and [set one up](https://aws.amazon.com/).
+If you don't have an Account on AWS yet, go ahead and [set one up](https://aws.amazon.com/).
 
 You'll also need the AWS CLI to authenticate, and that can be installed following [this guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
