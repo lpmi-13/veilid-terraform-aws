@@ -34,6 +34,11 @@ resource "aws_instance" "veilid-node" {
     volume_type           = "gp3"
   }
 
+  metadata_options {
+    # make sure the instance metadata service uses version 2 (requires session tokens for authenticated requests)
+    http_tokens = "required"
+  }
+
   vpc_security_group_ids = [aws_security_group.veilid-group.id]
 
   tags = {
