@@ -1,6 +1,10 @@
 
 resource "aws_vpc" "veilid-vpc" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name = "Veilid-VPC"
+  }
 }
 
 resource "aws_subnet" "veilid-subnet" {
