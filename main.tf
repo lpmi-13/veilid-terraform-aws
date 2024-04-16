@@ -22,6 +22,7 @@ resource "aws_instance" "veilid-node" {
 
   subnet_id                   = aws_subnet.veilid-subnet.id
   associate_public_ip_address = true
+  ipv6_address_count          = 1
 
   user_data_base64 = base64encode(file("./setup-veilid.yaml"))
 

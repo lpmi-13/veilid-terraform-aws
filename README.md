@@ -35,13 +35,18 @@ Here are the steps to get all ready to run terraform:
 After running `terraform apply`, you'll see the output of the public IP address like so:
 
 ```sh
-public_ip_address = [
-  "3.87.56.34",
+Outputs:
+
+public_ip_address_ipv4 = [
+  "34.221.247.223",
+]
+public_ip_address_ipv6 = [
+  "2600:1f14:2a39:ac01:ee48:312f:fad:30ba",
 ]
 ```
 
 so you can then SSH in if you wanna poke around a bit
 
 ```sh
-ssh -i ROUTE_TO_PRIVATE_KEY ubuntu@IP_ADDRESS_FROM_OUTPUT
+ssh -i ROUTE_TO_PRIVATE_KEY veilid@IP_ADDRESS_FROM_OUTPUT
 ```

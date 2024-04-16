@@ -1,6 +1,7 @@
 
 resource "aws_vpc" "veilid-vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block                       = "10.0.0.0/16"
+  assign_generated_ipv6_cidr_block = true
 
   tags = {
     Name = "Veilid-VPC"
@@ -10,6 +11,9 @@ resource "aws_vpc" "veilid-vpc" {
 resource "aws_subnet" "veilid-subnet" {
   vpc_id     = aws_vpc.veilid-vpc.id
   cidr_block = "10.0.1.0/24"
+
+  ipv6_cidr_block                 = cidrsubnet(aws_vpc.veilid-vpc.ipv6_cidr_block, 8, 1)
+  assign_ipv6_address_on_creation = true
 
   tags = {
     Name = "Veilid-Subnet"
@@ -42,10 +46,16 @@ resource "aws_route_table" "veilid-routes" {
   }
 }
 
-resource "aws_route" "public_internet_gateway" {
+resource "aws_route" "public_internet_gateway_ipv4" {
   route_table_id         = aws_route_table.veilid-routes.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.veilid-gw.id
+}
+
+resource "aws_route" "public_internet_gateway_ipv6" {
+  route_table_id              = aws_route_table.veilid-routes.id
+  destination_ipv6_cidr_block = "::/0"
+  gateway_id                  = aws_internet_gateway.veilid-gw.id
 }
 
 resource "aws_route_table_association" "public-gateway" {
