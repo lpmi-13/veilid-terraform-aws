@@ -37,6 +37,8 @@ resource "aws_vpc_security_group_egress_rule" "allow_veilid_egress_all_ipv4" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 
+  description = "allow all packets out - ipv4"
+
   tags = {
     Name = "allow all packets out - ipv4"
   }
@@ -46,6 +48,8 @@ resource "aws_vpc_security_group_egress_rule" "allow_veilid_egress_all_ipv6" {
   security_group_id = aws_security_group.veilid-group.id
   cidr_ipv6         = "::/0"
   ip_protocol       = "-1"
+
+  description = "allow all packets out - ipv6"
 
   tags = {
     Name = "allow all packets out - ipv6"
@@ -59,6 +63,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5150_tcp_ip
   ip_protocol       = "tcp"
   to_port           = 5150
 
+  description = "allow tcp ingress 5150 - ipv4"
+
   tags = {
     Name = "allow tcp ingress 5150 - ipv4"
   }
@@ -70,6 +76,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5150_udp_ip
   from_port         = 5150
   ip_protocol       = "udp"
   to_port           = 5150
+
+  description = "allow udp ingress 5150 - ipv4"
 
   tags = {
     Name = "allow udp ingress 5150 - ipv4"
@@ -83,6 +91,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5151_tcp_ip
   ip_protocol       = "tcp"
   to_port           = 5151
 
+  description = "allow tcp ingress 5151 - ipv4"
+
   tags = {
     Name = "allow tcp ingress 5151 - ipv4"
   }
@@ -94,6 +104,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5151_udp_ip
   from_port         = 5151
   ip_protocol       = "udp"
   to_port           = 5151
+
+  description = "allow udp ingress 5151 - ipv4"
 
   tags = {
     Name = "allow udp ingress 5151 - ipv4"
@@ -107,6 +119,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5150_tcp_ip
   ip_protocol       = "tcp"
   to_port           = 5150
 
+  description = "allow tcp ingress 5150 - ipv6"
+
   tags = {
     Name = "allow tcp ingress 5150 - ipv6"
   }
@@ -118,6 +132,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5150_udp_ip
   from_port         = 5150
   ip_protocol       = "udp"
   to_port           = 5150
+
+  description = "allow udp ingress 5150 - ipv6"
 
   tags = {
     Name = "allow udp ingress 5150 - ipv6"
@@ -131,6 +147,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5151_tcp_ip
   ip_protocol       = "tcp"
   to_port           = 5151
 
+  description = "allow tcp ingress 5151 - ipv6"
+
   tags = {
     Name = "allow tcp ingress 5151 - ipv6"
   }
@@ -142,6 +160,8 @@ resource "aws_vpc_security_group_ingress_rule" "allow_veilid_ingress_5151_udp_ip
   from_port         = 5151
   ip_protocol       = "udp"
   to_port           = 5151
+
+  description = "allow udp ingress 5151 - ipv6"
 
   tags = {
     Name = "allow udp ingress 5151 - ipv6"
