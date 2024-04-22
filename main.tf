@@ -20,9 +20,6 @@ resource "aws_instance" "veilid-node" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t4g.micro"
 
-  subnet_id                   = aws_subnet.veilid-subnet.id
-  associate_public_ip_address = true
-
   user_data_base64 = base64encode(file("./setup-veilid.yaml"))
 
   key_name = aws_key_pair.node-access.key_name
@@ -34,12 +31,17 @@ resource "aws_instance" "veilid-node" {
     volume_type           = "gp3"
   }
 
+  # we explicitly specify the index to be 0 so that an extra default network interface doesn't get created
+  # (which happens by default unless you do this), and then we have 2 network interfaces and things get confusing
+  network_interface {
+    network_interface_id = aws_network_interface.veilid-interface[count.index].id
+    device_index         = 0
+  }
+
   metadata_options {
     # make sure the instance metadata service uses version 2 (requires session tokens for authenticated requests)
     http_tokens = "required"
   }
-
-  vpc_security_group_ids = [aws_security_group.veilid-group.id]
 
   tags = {
     Name = "Veilid-Node-${count.index}"
