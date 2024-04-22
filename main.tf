@@ -18,7 +18,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "veilid-node" {
   count         = local.instance_count
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t4g.micro"
+  instance_type = "t4g.nano"
 
   user_data_base64 = base64encode(file("./setup-veilid.yaml"))
 

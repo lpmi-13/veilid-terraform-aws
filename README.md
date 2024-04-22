@@ -6,6 +6,14 @@ Running veilid nodes is a super easy way to help grow the network, and if you do
 
 Even though AWS doesn't have a "forever" free tier like Azure/GCP/Oracle, you might still want to take advantage of their 12-month free tier access, or even just run nodes in AWS because that's your preferred cloud environment.
 
+## Cost
+
+Since AWS doesn't have an always-on free tier (though they do offer 1 year of free tier, which would work with this configuration), you'll eventually have to pay a bit for this, but the majority of the cost will be the EC2 instance (the `t4g.nano`), which will run a little over $3/month.
+
+Because AWS charges for IPv4 addresses, the default configuration here won't give the instance a public IPv4 address. Since veilid is configured to use either IPv4 or IPV6 (or both if available), this isn't a problem at all for the node.
+
+However, if, like me, you don't have an IPv6 address from your internet provider, then you won't be able to connect via SSH to poke around via `veilid-cli`. If you'd like to get an IPv4 address, change the value for `needIpv4` in `local.tf` to `true`. You'll get the IPv4 address in the output after running `terraform apply`, and you can SSH to that address. Remember to change it back and re-run `terraform apply` when you're done, or you'll be paying an addition $3.5/month, which will double the cost for this node.
+
 ## Setup
 
 You'll need terraform to run this, and you can get the installation instructions [here](https://developer.hashicorp.com/terraform/install).
@@ -37,6 +45,17 @@ After running `terraform apply`, you'll see the output of the public IP address 
 ```sh
 Outputs:
 
+public_ip_address_ipv4 = []
+public_ip_address_ipv6 = [
+  "2600:1f13:52f:d701:783d:b420:b6f1:ff74",
+]
+```
+
+If you later decide you also want an IPv4 address, it'll look something like:
+
+```sh
+Outputs:
+
 public_ip_address_ipv4 = [
   "34.221.247.223",
 ]
@@ -50,3 +69,5 @@ so you can then SSH in if you wanna poke around a bit
 ```sh
 ssh -i ROUTE_TO_PRIVATE_KEY veilid@IP_ADDRESS_FROM_OUTPUT
 ```
+
+> when using an IPv6 address via ssh, you might need to put square brackets around the address, eg - `ssh -i ROUTE_TO_PRIVATE_KEY veilid@[IP_ADDRESS_FROM_OUTPUT]`
