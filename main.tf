@@ -43,6 +43,13 @@ resource "aws_instance" "veilid-node" {
     http_tokens = "required"
   }
 
+  lifecycle {
+    # Don't automatically upgrade the instance when a newer AMI is released. Because we use `most_recent = true`
+    # in the data source, if you run apply after a newer AMI is released, it will trigger a destroy and recreate
+    # of the instance, which will wipe all the DHT data.
+    ignore_changes = [ami]
+  }
+
   tags = {
     Name = "Veilid-Node-${count.index}"
   }
