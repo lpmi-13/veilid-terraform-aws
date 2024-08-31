@@ -24,6 +24,10 @@ resource "aws_instance" "veilid-node" {
 
   key_name = aws_key_pair.node-access.key_name
 
+  volume_tags = {
+    "Name" = "Veilid storage for Node-${count.index}"
+  }
+
   root_block_device {
     delete_on_termination = true
     encrypted             = true
